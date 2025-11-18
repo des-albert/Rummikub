@@ -402,7 +402,7 @@ fun ScoreSummary(
                     )
                     {
                         Text(
-                            text = "Clear Score History",
+                            text = "Clear History",
                             fontSize = 12.sp
                         )
                     }
