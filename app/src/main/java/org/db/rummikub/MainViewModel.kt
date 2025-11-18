@@ -15,6 +15,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import java.util.Locale
+import androidx.core.content.edit
 
 data class Score(
     var name: String,
@@ -94,11 +95,11 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     fun saveHistory(history: List<Int>) {
         val historyString = history.joinToString(separator = ",")
-        sharedPreferences.edit().putString("history", historyString).apply()
+        sharedPreferences.edit { putString("rummikub", historyString) }
     }
 
     fun loadHistory() {
-        var historyString = sharedPreferences.getString("history", null)
+        val historyString = sharedPreferences.getString("rummikub", null)
         if (!historyString.isNullOrEmpty()) {
             val historyList = historyString.split(",").map { it.trim().toInt() }
             history.clear()
