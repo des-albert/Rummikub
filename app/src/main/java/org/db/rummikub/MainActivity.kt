@@ -112,7 +112,7 @@ fun ScoreSummary(
     var isRunning by remember { mutableStateOf(false) }
     var duration by remember { mutableIntStateOf(1) }
 
-    val scores = playerViewModel.history
+    val wins = playerViewModel.history
 
     val imageMap = mapOf(
         "DB" to R.drawable.db,
@@ -203,7 +203,7 @@ fun ScoreSummary(
                         )
                         Spacer(modifier = Modifier.height(4.dp))
                         Text(
-                            text = scores[index].toString(),
+                            text = wins[index].toString(),
                             fontSize = 16.sp,
                             color = MaterialTheme.colorScheme.errorContainer
                         )
@@ -371,7 +371,7 @@ fun ScoreSummary(
                         ),
                         onClick = {
                             val newScores =
-                                listOf(players[0].wins, players[1].wins, players[2].wins)
+                                listOf(players[0].wins + wins[0], players[1].wins + wins[1], players[2].wins + wins[2])
                             playerViewModel.saveHistory(newScores)
                         }
                     )
