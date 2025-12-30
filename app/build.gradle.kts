@@ -22,18 +22,23 @@ android {
     release {
       isMinifyEnabled = false
       proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+        signingConfig = signingConfigs.getByName("debug")
     }
   }
   compileOptions {
-    sourceCompatibility = JavaVersion.VERSION_11
-    targetCompatibility = JavaVersion.VERSION_11
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
   }
-  kotlinOptions {
-    jvmTarget = "11"
-  }
+
   buildFeatures {
     compose = true
   }
+}
+
+kotlin {
+    compilerOptions {
+        optIn.add("kotlin.RequiresOptIn")
+    }
 }
 
 dependencies {
@@ -60,3 +65,9 @@ dependencies {
   implementation(libs.androidx.compose.ui.text.google.fonts)
   implementation (libs.androidx.media)
 }
+
+// implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.10.0")
+// implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.10.0")
+// implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.10.0")
+// implementation("androidx.compose.ui:ui-text-google-fonts:1.10.0")
+// implementation("androidx.navigation:navigation-compose:2.9.6")

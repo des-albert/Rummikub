@@ -20,6 +20,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
@@ -28,8 +29,7 @@ import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.TopAppBarColors
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -60,8 +60,8 @@ class MainActivity : ComponentActivity() {
                     topBar = {
                         TopBar()
                     },
-                    modifier = Modifier.fillMaxSize()
-                ) { innerPadding ->
+
+                    ) { innerPadding ->
                     ScoreSummary(
                         modifier = Modifier.padding(innerPadding)
                     )
@@ -75,21 +75,20 @@ class MainActivity : ComponentActivity() {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TopBar() {
-    TopAppBar(
+    CenterAlignedTopAppBar(
         title = {
-            Box(
-                modifier = Modifier.fillMaxSize(),
-                contentAlignment = Alignment.Center
-            ) {
-                Text(
-                    style = MaterialTheme.typography.headlineMedium,
-                    text = "RummiKub"
-                )
-            }
+            Text(
+                style = MaterialTheme.typography.headlineMedium,
+                text = "RummiKub"
+            )
         },
-        colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
+        colors = TopAppBarColors(
             containerColor = MaterialTheme.colorScheme.secondaryContainer,
-            titleContentColor = MaterialTheme.colorScheme.secondary
+            titleContentColor = MaterialTheme.colorScheme.secondary,
+            scrolledContainerColor = MaterialTheme.colorScheme.secondary,
+            navigationIconContentColor = MaterialTheme.colorScheme.tertiary,
+            actionIconContentColor = MaterialTheme.colorScheme.secondary,
+            subtitleContentColor = MaterialTheme.colorScheme.secondary
         )
     )
 }
@@ -371,7 +370,11 @@ fun ScoreSummary(
                         ),
                         onClick = {
                             val newScores =
-                                listOf(players[0].wins + wins[0], players[1].wins + wins[1], players[2].wins + wins[2])
+                                listOf(
+                                    players[0].wins + wins[0],
+                                    players[1].wins + wins[1],
+                                    players[2].wins + wins[2]
+                                )
                             playerViewModel.saveHistory(newScores)
                         }
                     )
@@ -396,7 +399,7 @@ fun ScoreSummary(
                         ),
                         onClick = {
                             val newScores =
-                                listOf(0,0,0)
+                                listOf(0, 0, 0)
                             playerViewModel.saveHistory(newScores)
                         }
                     )

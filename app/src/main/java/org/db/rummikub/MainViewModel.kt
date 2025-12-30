@@ -99,7 +99,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun loadHistory() {
-        val historyString = sharedPreferences.getString("rummikub", null)
+         val historyString = sharedPreferences.getString("rummikub", null)
         if (!historyString.isNullOrEmpty()) {
             val historyList = historyString.split(",").map { it.trim().toInt() }
             history.clear()
